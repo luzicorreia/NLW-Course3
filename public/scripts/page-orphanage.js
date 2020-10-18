@@ -8,10 +8,10 @@ const options = {
 }
 
 // create map
-const map = L.map('mapid', options).setView([-23.6815314,-46.8754974], 15)
+const map = L.map('mapid', options).setView([-23.6815314,-46.8754974], 15);
 
 // create and add tileLayer
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 // create icon
 const icon = L.icon({

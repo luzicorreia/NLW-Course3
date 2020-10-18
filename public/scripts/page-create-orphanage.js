@@ -1,33 +1,33 @@
 // create map
-const map = L.map('mapid').setView([-23.6815314,-46.8754974], 15)
+const map = L.map('mapid').setView([-23.6815314,-46.8754974], 15);
 
 // create and add tileLayer
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 // create icon
 const icon = L.icon({
     iconUrl: "/images/map-marker.svg",
     iconSize: [58, 68],
-    iconAnchor: [29, 68]   
-})
+    iconAnchor: [29, 68],
+});
 
 // 'let' significa que pode mudar a variavel, no caso 'marker'
 let marker;
 
 // create and add marker
-map.on('click', (event) => {
-    const lat = event.latlat.lat;
+map.on('click', function(event) {
+    const lat = event.latlng.lat;
     const lng = event.latlng.lng;
 
     document.querySelector('[name=lat]').value = lat;
     document.querySelector('[name=lng]').value = lng;
 
     // remove icon
-    marker && map.removeLayer(marker)
+    marker && map.removeLayer(marker);
 
     // add icon layer
     marker = L.marker([lat, lng], {icon})
-    .addTo(map)
+    .addTo(map);
 })
 
 
@@ -86,4 +86,13 @@ function toggleSelect(event) {
     const input = document.querySelector('[name="open_on_weekends"]')
 
     input.value = button.dataset.value
+} 
+
+function validate(event) {
+    // Validar se latitude e longitude estão preenchidos
+    const needsLatAndLng = true;
+    if(needsLatAndLng) {
+        event.preventDefault()
+        alert('Selecione um ponto no mapa')
+    }
 }

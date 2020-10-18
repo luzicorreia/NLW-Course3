@@ -1,13 +1,14 @@
-const db = require('./db');
+// const db = require('./db');
 const Database = require('./db');
 
-Database.then(function(db) {
+Database.then(async db => {
     // Inserir dados na tabela
-    db.run(`
+    await db.run(`
     INSERT INTO orphanages (
         lat,
         lng,
         name,
+        about,
         whatsapp,
         images,
         instructions,
@@ -16,14 +17,21 @@ Database.then(function(db) {
     ) VALUES (
         "-23.6815314",
         "-46.8754974",
-        "Lar das meninas - Girls",
+        "Lar dos meninos - Boys",
         "Presta assistência a crianças de 06 a 15 anos em situação de risco ou vulnerabildiade social.",
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fhands&psig=AOvVaw22uQLWtG_lVHPjZyKjogh8&ust=1602970616598000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPDP44OJuuwCFQAAAAAdAAAAABAI",
+        "987562451",
+        "https://images.unsplash.com/photo-1562694909-3d53309d5e14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
         "Venha nos visitar. Traga seu carinho",
         "horário de visita da 18h ate 8h",
         "1"
     );
-    `)
+    `) 
 
     // Consultar dados na tabela
+       const selectedOrphanages = await db.all("SELECT * FROM orphanages")
+       console.log(selectedOrphanages)
+
+    // Consultar somente 1 orfanato pelo ID
+    const orphanage = await db.all('SELECT * FROM orphanages WHERE id = "1"')
+    console.log(orphanage)
 })
